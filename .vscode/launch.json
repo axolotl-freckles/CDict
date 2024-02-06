@@ -1,0 +1,19 @@
+{
+  "configurations": [
+    {
+      "name": "C/C++: cl.exe build and debug active file",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}\\bin\\debug\\cdict.exe",
+      // "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "",
+      // "cwd": "${fileDirname}",
+      "environment": [],
+      "console": "integratedTerminal",
+      "preLaunchTask": "C/C++: cl.exe build active file"
+    }
+  ],
+  "version": "2.0.0"
+}
