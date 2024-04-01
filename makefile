@@ -1,6 +1,6 @@
 CPP  = cl
 LINK = link
-VERSION = 0.0.01
+VERSION = 0.0
 
 SRC_DIR   = ./src
 BIN_DIR   = ./bin
