@@ -7,6 +7,7 @@
 #include <vector>
 
 #include <loop_limits.hpp>
+#include <gui_api.hpp>
 
 // #define MAX_IT       256
 
@@ -32,7 +33,7 @@ size_t getdir(const char* fileroute, char* dest, const size_t max) {
 }
 
 int main(int nargs, char *args[]) {
-	// (void)std::setlocale(LC_ALL, STD_LOCALE);
+	(void)std::setlocale(LC_ALL, STD_LOCALE);
 	// std::locale base_locale(STD_LOCALE);
 	// std::locale inte_locale("");
 	// std::cout.imbue(base_locale);
@@ -46,8 +47,9 @@ int main(int nargs, char *args[]) {
 
 	std::cout <<"Ruta de ejecutable:\n\t"        <<dir_name     <<'\n';
 	std::cout <<"Ruta del archivo de prueba:\n\t"<<test_filename<<'\n';
-	std::cout <<"El locale de lectura actual es:   "          <<std::cin .getloc().name()<<'\n';
-	std::cout <<"El locale de escritura actual es: "          <<std::cout.getloc().name()<<'\n';
+	std::cout <<"El locale global actual es:       " << std::setlocale(LC_ALL, NULL)<<'\n';
+	std::cout <<"El locale de lectura actual es:   " <<std::cin .getloc().name()<<'\n';
+	std::cout <<"El locale de escritura actual es: " <<std::cout.getloc().name()<<'\n';
 	// (void)std::fprintf(std::cout, "Ruta de ejecutable:\n\t%s\n", dir_name);
 	// (void)std::fprintf(std::cout, "Ruta del archivo de prueba:\n\t%s\n", test_filename);
 	// (void)std::fprintf(std::cout, "El locale actual es: %s\n", base_locale.name());
@@ -85,5 +87,16 @@ int main(int nargs, char *args[]) {
 	content.clear();
 	std::cout <<buffer<<'\n';
 	// (void)std::fprintf(std::cout, "%s\n", buffer);
+
+	WINDOW_HANDLER window_id = gui::create_window(1200, 720, "¡Hola!");
+
+	if (window_id == NULL) {
+		std::cerr << "ERROR AL CREAR VENTANA\n";
+		return 1;
+	}
+
+	while (gui::window_running(window_id)) {
+		gui::update_window(window_id);
+	}
 	return 0;
 }
