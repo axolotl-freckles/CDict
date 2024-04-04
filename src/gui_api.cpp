@@ -1,5 +1,9 @@
 #include <gui_api.hpp>
+// #include <cwchar>
+#include <cstdlib>
 #include <set>
+
+#define STR_LEN 256
 
 #ifdef _WIN32
 	static std::set<HWND> running_windows;
@@ -25,21 +29,26 @@
 	}
 
 	WINDOW_HANDLER gui::create_window(const int width, const int height, const char* title) {
-		HINSTANCE instance = GetModuleHandleA(0);
-
-		WNDCLASSA window_class     = {};
-		window_class.hInstance     = instance;
-		window_class.hCursor       = LoadCursor(NULL, IDC_ARROW);
-		window_class.lpszClassName = title;
-		window_class.lpfnWndProc   = window_callback;
-
-		if (!RegisterClassA(&window_class))
+		wchar_t  *wtitle     = new wchar_t[STR_LEN];
+		size_t    written_ch = std::mbstowcs(wtitle, title, STR_LEN);
+		if (written_ch >= STR_LEN)
 			return NULL;
 
-		HWND window_handle = CreateWindowExA(
+		HINSTANCE instance   = GetModuleHandleA(NULL);
+
+		WNDCLASSW window_class     = {};
+		window_class.hInstance     = instance;
+		window_class.hCursor       = LoadCursor(NULL, IDC_ARROW);
+		window_class.lpszClassName = wtitle;
+		window_class.lpfnWndProc   = window_callback;
+
+		if (!RegisterClassW(&window_class))
+			return NULL;
+
+		HWND window_handle = CreateWindowExW(
 			0,
-			title,
-			title,
+			wtitle,
+			wtitle,
 			WS_OVERLAPPEDWINDOW,
 			100,
 			100,
