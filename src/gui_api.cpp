@@ -2,13 +2,6 @@
 #include <set>
 
 #ifdef _WIN32
-	#define WIN32_LEAN_AND_MEAN
-	#define NOMINMAX
-
-	// extern "C" {
-	// 	#include <Windows.h>
-	// }
-
 	static std::set<HWND> running_windows;
 
 	static LRESULT CALLBACK window_callback(
