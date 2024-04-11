@@ -20,6 +20,7 @@
 		switch (msg) {
 			case WM_CLOSE:
 				running_windows.erase(window_handler);
+				DestroyWindow(window_handler);
 				break;
 			default:
 				result = DefWindowProcA(window_handler, msg, wParam, lParam);
@@ -29,8 +30,8 @@
 	}
 
 	WINDOW_HANDLER gui::create_window(const int width, const int height, const char* title) {
-		wchar_t  *wtitle     = new wchar_t[STR_LEN];
-		size_t    written_ch = std::mbstowcs(wtitle, title, STR_LEN);
+		wchar_t *wtitle     = new wchar_t[STR_LEN];
+		size_t   written_ch = std::mbstowcs(wtitle, title, STR_LEN);
 		if (written_ch >= STR_LEN)
 			return NULL;
 

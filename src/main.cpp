@@ -83,15 +83,15 @@ int main(int nargs, char *args[]) {
 	std::vector<char*> content;
 	content.reserve(STD_CONT_CAP);
 
-	(void)lplim::reset_loop();
-	while (std::cin && lplim::count_loop()) {
-		(void)std::cin.getline(input_buffer, STD_STR_LEN, '\n');
-		char *line = new char[STD_STR_LEN];
-		if (line == nullptr) continue;
-		(void)std::strcpy(line, input_buffer);
+	// (void)lplim::reset_loop();
+	// while (std::cin && lplim::count_loop()) {
+	// 	(void)std::cin.getline(input_buffer, STD_STR_LEN, '\n');
+	// 	char *line = new char[STD_STR_LEN];
+	// 	if (line == nullptr) continue;
+	// 	(void)std::strcpy(line, input_buffer);
 
-		content.push_back(line);
-	}
+	// 	content.push_back(line);
+	// }
 
 	(void)std::sprintf(char_buff, "%s\\%s", dir_name, BASE_OUT);
 	std::ofstream output_file(char_buff);
